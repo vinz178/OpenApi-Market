@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Maschine",
+    "description": "Service that executes the actual processings.",
+    "termsOfService": "http://BeschreibungDerMaschine.com/terms/",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/machine/nesting": {
+      "post": {
+        "tags": [
+          "machine"
+        ],
+        "description": "create a nesting",
+        "requestBody": {
+          "description": "desired state of nesting",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NestingPart"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NestingPart"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid Input -> the nesting is not created"
+          },
+          "500": {
+            "description": "Internal Server Error -> the nesting is not created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NestingPart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "rowPartId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "inizialized",
+          "waiting",
+          "processing",
+          "cancel",
+          "error",
+          "succeded"
+        ]
+      }
+    }
+  }
+}

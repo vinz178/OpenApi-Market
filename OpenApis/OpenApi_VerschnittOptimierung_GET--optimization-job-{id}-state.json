@@ -1,0 +1,83 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Verschnitt Optimierung",
+    "description": "Service that nests ProductionParts into RowPart",
+    "termsOfService": "http://BeschreibungDerOptimierung.com/terms/",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/optimization/job/{id}/state": {
+      "get": {
+        "tags": [
+          "optimization"
+        ],
+        "description": "Get the state of a optimizationjob by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/State"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/State"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "created",
+          "processing",
+          "done"
+        ]
+      }
+    }
+  }
+}

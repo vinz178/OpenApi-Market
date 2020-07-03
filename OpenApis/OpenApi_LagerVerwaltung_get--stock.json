@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Lagerverwaltung",
+    "description": "Service that does the stock management.",
+    "termsOfService": "http://BeschreibungDerLagerverwaltung.com/terms/",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/stock": {
+      "get": {
+        "tags": [
+          "stock"
+        ],
+        "description": "get the stock",
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stock"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stock"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid Input -> the reservation is not created"
+          },
+          "500": {
+            "description": "Internal Server Error -> the reservation is not created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Stock": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RawPartType"
+        }
+      },
+      "RawPartType": {
+        "type": "object",
+        "properties": {
+          "dimension": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "dimensionZ": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Dimension": {
+        "type": "object",
+        "properties": {
+          "DimensionX": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "DimensionY": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    }
+  }
+}

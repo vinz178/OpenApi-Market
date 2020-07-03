@@ -1,0 +1,147 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Verschnitt Optimierung",
+    "description": "Service that nests ProductionParts into RowPart",
+    "termsOfService": "http://BeschreibungDerOptimierung.com/terms/",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/optimization/job": {
+      "post": {
+        "tags": [
+          "optimization"
+        ],
+        "description": "Add a new optimizationjob",
+        "requestBody": {
+          "description": "Productionjob object that needs to be added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimizationJob"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/OptimizationJob"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid Input -> the job is not created"
+          },
+          "500": {
+            "description": "Internal Server Error -> the job is not created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "OptimizationJob": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OptimizationPart"
+            }
+          },
+          "machineInfo": {
+            "$ref": "#/components/schemas/MachineInfo"
+          }
+        }
+      },
+      "OptimizationPart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "MachineInfo": {
+        "type": "object",
+        "properties": {
+          "maschinetype": {
+            "type": "string",
+            "enum": [
+              "panel",
+              "beam"
+            ]
+          },
+          "configuration": {
+            "type": "object",
+            "properties": {
+              "saw": {
+                "type": "boolean"
+              },
+              "miller": {
+                "type": "boolean"
+              },
+              "driller": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
