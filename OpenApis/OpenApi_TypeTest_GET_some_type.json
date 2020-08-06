@@ -48,10 +48,8 @@
         "type": "object",
         "properties": {
           "Name": {
-            "type": [
-              "null",
+            "type": 
               "string"
-            ]
           }
         }
 
