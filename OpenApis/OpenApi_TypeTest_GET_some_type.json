@@ -45,35 +45,21 @@
   "components": {
     "schemas": {
       "MyType": {
-        "definitions": {
-          "Person": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Name": {
-                "type": "string"
-              }
-            }
+        "title": "MyEnum",
+        "type": "integer",
+        "description": "",
+        "x-enumNames": [
+          "AValue",
+          "BValue",
+          "CValue"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
 
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Person"
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "ToyName": {
-              "type": "string"
-            }
-          }
-        }
-      ]
-
-    }
+      }
     }
   }
 }
