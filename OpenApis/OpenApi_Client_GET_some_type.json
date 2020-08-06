@@ -45,7 +45,8 @@
   "components": {
     "schemas": {
       "MyType": {
-        "type": "string"
+        "type": "number",
+		"format": "decimal"
       }
     }
   }
