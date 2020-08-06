@@ -45,7 +45,8 @@
   "components": {
     "schemas": {
       "MyType": {
-        "type": "boolean"
+        "type": "integer",
+		"format": "byte"
       }
     }
   }
