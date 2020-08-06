@@ -46,7 +46,6 @@
     "schemas": {
       "MyType": {
         "type": "object",
-        "additionalProperties": false,
         "properties": {
           "Name": {
             "type": [
@@ -55,8 +54,6 @@
             ]
           }
         }
-
-
       }
     }
   }
