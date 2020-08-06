@@ -21,33 +21,32 @@
     }
   ],
   "paths": {
-    "/stock": {
-      "get": {
+    "/stock/reservation/{RawPartType}": {
+      "delete": {
         "tags": [
           "stock"
         ],
-        "description": "get the stock",
-        "responses": {
-          "201": {
-            "description": "created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Stock"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Stock"
-                }
-              }
+        "description": "add a reservation",
+        "parameters": [
+          {
+            "name": "RawPartType",
+            "in": "path",
+            "description": "The Rawpart that is not needed anymore.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Reservation"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deleted"
           },
           "405": {
-            "description": "Invalid Input -> the reservation is not created"
+            "description": "Invalid Input -> the reservation is not deleted"
           },
           "500": {
-            "description": "Internal Server Error -> the reservation is not created"
+            "description": "Internal Server Error -> the reservation is not deleted"
           }
         }
       }
@@ -55,11 +54,8 @@
   },
   "components": {
     "schemas": {
-      "Stock": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/RawPartType"
-        }
+      "Reservation": {
+        "$ref": "#/components/schemas/RawPartType"
       },
       "RawPartType": {
         "type": "object",
