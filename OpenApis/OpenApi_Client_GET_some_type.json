@@ -45,8 +45,8 @@
   "components": {
     "schemas": {
       "MyType": {
-        "type": "number",
-		"format": "float"
+        "type": "integer",
+		"format": "int32"
       }
     }
   }
