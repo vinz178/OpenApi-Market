@@ -45,19 +45,10 @@
   "components": {
     "schemas": {
       "MyType": {
-        "title": "MyEnum",
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "AValue",
-          "BValue",
-          "CValue"
-        ],
-        "enum": [
-          0,
-          1,
-          2
-        ]
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
 
       }
     }
