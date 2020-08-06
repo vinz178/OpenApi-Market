@@ -45,7 +45,10 @@
   "components": {
     "schemas": {
       "MyType": {
-        "type": "integer"
+			"type": "integer"
+			"minimum": "0"
+			"maximum": "65535"
+
       }
     }
   }
