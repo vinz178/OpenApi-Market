@@ -46,7 +46,7 @@
     "schemas": {
       "MyType": {
         "type": "number",
-		"format": "decimal"
+		"format": "double"
       }
     }
   }
