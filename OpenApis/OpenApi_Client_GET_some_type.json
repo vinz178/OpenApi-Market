@@ -45,14 +45,32 @@
   "components": {
     "schemas": {
       "MyType": {
+        "definitions": {
+          "Person": {
         "type": "object",
 		"additionalProperties": false,
         "properties": {
           "Name": {
-            "type": 
-              "string"
+                "type": "string"
+              }
+            }
           }
         }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Person"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ToyName": {
+              "type": "string"
+            }
+          }
+        }
+      ]
       }
     }
   }
