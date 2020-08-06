@@ -45,8 +45,7 @@
   "components": {
     "schemas": {
       "MyType": {
-        "type": "integer",
-		"format": "byte"
+        "type": "string"
       }
     }
   }
