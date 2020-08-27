@@ -97,7 +97,7 @@
         }
       }
     },
-    "/availableMaterial": {
+    "/stock/availableMaterial": {
       "get": {
         "tags": [
           "stock"
@@ -131,12 +131,17 @@
         "format": "uuid"
       },
       "ReservationState": {
-        "type": "string",
-        "enum": [
-          "reservationActive",
-          "materialConsumed",
-          "reservationLapsed"
-        ]
+        "type": "object",
+        "properties": {
+          "State": {
+            "type": "string",
+            "enum": [
+              "reservationActive",
+              "materialConsumed",
+              "reservationLapsed"
+            ]
+          }
+        }
       },
       "Material": {
         "type": "object",

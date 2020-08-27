@@ -21,7 +21,7 @@
     }
   ],
   "paths": {
-    "/availableMaterial": {
+    "/stock/availableMaterial": {
       "get": {
         "tags": [
           "stock"
