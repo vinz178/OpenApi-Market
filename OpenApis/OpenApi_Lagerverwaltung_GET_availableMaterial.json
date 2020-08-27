@@ -21,32 +21,28 @@
     }
   ],
   "paths": {
-    "/stock/reservation/{RawPartType}": {
-      "delete": {
+    "/availableMaterial": {
+      "get": {
         "tags": [
           "stock"
         ],
-        "description": "add a reservation",
-        "parameters": [
-          {
-            "name": "RawPartType",
-            "in": "path",
-            "description": "The Rawpart that is not needed anymore.",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Reservation"
-            }
-          }
-        ],
+        "description": "get the stock",
         "responses": {
           "200": {
-            "description": "deleted"
+            "description": "available material",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailableMaterial"
+                }
+              }
+            }
           },
           "405": {
-            "description": "Invalid Input -> the reservation is not deleted"
+            "description": "Invalid Input -> the reservation is not created"
           },
           "500": {
-            "description": "Internal Server Error -> the reservation is not deleted"
+            "description": "Internal Server Error -> the reservation is not created"
           }
         }
       }
@@ -54,33 +50,44 @@
   },
   "components": {
     "schemas": {
-      "Reservation": {
-        "$ref": "#/components/schemas/RawPartType"
+      "AvailableMaterial": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Material"
+        }
       },
-      "RawPartType": {
+      "Material": {
         "type": "object",
         "properties": {
-          "dimension": {
-            "$ref": "#/components/schemas/Dimension"
+          "RawPartType": {
+            "$ref": "#/components/schemas/RawPartType"
           },
-          "dimensionZ": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "count": {
+          "Count": {
             "type": "integer",
             "format": "int64"
           }
         }
       },
-      "Dimension": {
+      "RawPartType": {
         "type": "object",
         "properties": {
-          "DimensionX": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "Length": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "Height": {
             "type": "integer",
             "format": "int64"
           },
-          "DimensionY": {
+          "Width": {
             "type": "integer",
             "format": "int64"
           }

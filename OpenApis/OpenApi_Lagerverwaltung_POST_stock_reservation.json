@@ -32,12 +32,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Reservation"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/Reservation"
+                "$ref": "#/components/schemas/Material"
               }
             }
           },
@@ -45,7 +40,14 @@
         },
         "responses": {
           "201": {
-            "description": "created"
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
           },
           "405": {
             "description": "Invalid Input -> the reservation is not created"
@@ -59,33 +61,42 @@
   },
   "components": {
     "schemas": {
-      "Reservation": {
-        "$ref": "#/components/schemas/RawPartType"
-      },
-      "RawPartType": {
+      "Material": {
         "type": "object",
         "properties": {
-          "dimension": {
-            "$ref": "#/components/schemas/Dimension"
+          "RawPartType": {
+            "$ref": "#/components/schemas/RawPartType"
           },
-          "dimensionZ": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "count": {
+          "Count": {
             "type": "integer",
             "format": "int64"
           }
         }
       },
-      "Dimension": {
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "RawPartType": {
         "type": "object",
         "properties": {
-          "DimensionX": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "Length": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "Height": {
             "type": "integer",
             "format": "int64"
           },
-          "DimensionY": {
+          "Width": {
             "type": "integer",
             "format": "int64"
           }

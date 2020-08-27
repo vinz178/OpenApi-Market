@@ -32,12 +32,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Reservation"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/Reservation"
+                "$ref": "#/components/schemas/Material"
               }
             }
           },
@@ -45,7 +40,14 @@
         },
         "responses": {
           "201": {
-            "description": "created"
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
           },
           "405": {
             "description": "Invalid Input -> the reservation is not created"
@@ -56,84 +58,58 @@
         }
       }
     },
-    "/stock/reservation/{RawPartType}": {
-      "delete": {
+    "/stock/reservation/{id}/state": {
+      "put": {
         "tags": [
           "stock"
         ],
-        "description": "add a reservation",
+        "description": "change state of a reservation",
         "parameters": [
           {
-            "name": "RawPartType",
+            "name": "id",
             "in": "path",
-            "description": "The Rawpart that is not needed anymore.",
+            "description": "The Reservation that will be manipulated.",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Reservation"
+              "$ref": "#/components/schemas/Id"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationState"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "deleted"
+            "description": "reservation state changed"
           },
           "405": {
-            "description": "Invalid Input -> the reservation is not deleted"
+            "description": "Invalid Input -> the reservation state has not changed"
           },
           "500": {
-            "description": "Internal Server Error -> the reservation is not deleted"
+            "description": "Internal Server Error -> the reservation state has not changed"
           }
         }
       }
     },
-    "/stock/{RawPartType}": {
-      "delete": {
-        "tags": [
-          "stock"
-        ],
-        "description": "add a reservation",
-        "parameters": [
-          {
-            "name": "RawPartType",
-            "in": "path",
-            "description": "The Rawpart that is not needed anymore.",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/RawPartType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "deleted"
-          },
-          "405": {
-            "description": "Invalid Input -> the reservation is not deleted"
-          },
-          "500": {
-            "description": "Internal Server Error -> the reservation is not deleted"
-          }
-        }
-      }
-    },
-    "/stock": {
+    "/availableMaterial": {
       "get": {
         "tags": [
           "stock"
         ],
         "description": "get the stock",
         "responses": {
-          "201": {
-            "description": "created",
+          "200": {
+            "description": "available material",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Stock"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Stock"
+                  "$ref": "#/components/schemas/AvailableMaterial"
                 }
               }
             }
@@ -154,17 +130,34 @@
         "type": "string",
         "format": "uuid"
       },
-      "Reservation": {
-        "$ref": "#/components/schemas/RawPartType"
+      "ReservationState": {
+        "type": "string",
+        "enum": [
+          "reservationActive",
+          "materialConsumed",
+          "reservationLapsed"
+        ]
       },
-      "Dimension": {
+      "Material": {
         "type": "object",
         "properties": {
-          "DimensionX": {
+          "RawPartType": {
+            "$ref": "#/components/schemas/RawPartType"
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "Height": {
             "type": "integer",
             "format": "int64"
           },
-          "DimensionY": {
+          "Width": {
             "type": "integer",
             "format": "int64"
           }
@@ -173,23 +166,19 @@
       "RawPartType": {
         "type": "object",
         "properties": {
-          "dimension": {
-            "$ref": "#/components/schemas/Dimension"
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
           },
-          "dimensionZ": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "count": {
+          "Length": {
             "type": "integer",
             "format": "int64"
           }
         }
       },
-      "Stock": {
+      "AvailableMaterial": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/RawPartType"
+          "$ref": "#/components/schemas/Material"
         }
       }
     }

@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Lagerverwaltung",
+    "description": "Service that does the stock management.",
+    "termsOfService": "http://BeschreibungDerLagerverwaltung.com/terms/",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/stock/reservation/{id}/state": {
+      "put": {
+        "tags": [
+          "stock"
+        ],
+        "description": "change state of a reservation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Reservation that will be manipulated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationState"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "reservation state changed"
+          },
+          "405": {
+            "description": "Invalid Input -> the reservation state has not changed"
+          },
+          "500": {
+            "description": "Internal Server Error -> the reservation state has not changed"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "ReservationState": {
+        "type": "string",
+        "enum": [
+          "reservationActive",
+          "materialConsumed",
+          "reservationLapsed"
+        ]
+      }
+    }
+  }
+}
