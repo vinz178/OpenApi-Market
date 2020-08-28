@@ -68,7 +68,7 @@
         "tags": [
           "machine"
         ],
-        "description": "Get all id of all nestings.",
+        "description": "Get all ids of all nestings.",
         "responses": {
           "200": {
             "description": "OK",
@@ -325,11 +325,12 @@
       "MachineInfo": {
         "type": "object",
         "properties": {
-          "maschinetype": {
+          "machineType": {
             "type": "string",
             "enum": [
               "panel",
-              "beam"
+              "beam",
+              "compound"
             ]
           },
           "configuration": {

@@ -26,7 +26,7 @@
         "tags": [
           "machine"
         ],
-        "description": "Get all id of all nestings.",
+        "description": "Get all ids of all nestings.",
         "responses": {
           "200": {
             "description": "OK",

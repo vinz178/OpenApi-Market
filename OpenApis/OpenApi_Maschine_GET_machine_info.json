@@ -58,11 +58,12 @@
       "MachineInfo": {
         "type": "object",
         "properties": {
-          "maschinetype": {
+          "machineType": {
             "type": "string",
             "enum": [
               "panel",
-              "beam"
+              "beam",
+              "compound"
             ]
           },
           "configuration": {

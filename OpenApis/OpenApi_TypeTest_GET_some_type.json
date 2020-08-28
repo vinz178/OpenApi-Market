@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "TypeTest",
-    "description": "Test typ",
+    "title": "Maschine",
+    "description": "Service that executes the actual processings.",
     "termsOfService": "http://BeschreibungDerMaschine.com/terms/",
     "contact": {
       "name": "Vinzenz Geyer",
@@ -21,22 +21,49 @@
     }
   ],
   "paths": {
-    "/machine/info": {
-      "get": {
+    "/machine/nesting": {
+      "post": {
         "tags": [
           "machine"
         ],
-        "description": "Get information about the machine.",
+        "description": "create a nesting",
+        "requestBody": {
+          "description": "desired state of nesting",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NestingPart"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/NestingPart"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MyType"
+                  "$ref": "#/components/schemas/Id"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
                 }
               }
             }
+          },
+          "405": {
+            "description": "Invalid Input -> the nesting is not created"
+          },
+          "500": {
+            "description": "Internal Server Error -> the nesting is not created"
           }
         }
       }
@@ -44,12 +71,52 @@
   },
   "components": {
     "schemas": {
-      "MyType": {
-        "type": "array",
-        "items": {
-          "type": "string"
+      "NestingPart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "rowPartId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Width": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1250,
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
-
+      },
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "inizialized",
+          "waiting",
+          "processing",
+          "cancel",
+          "error",
+          "succeded"
+        ]
       }
     }
   }
