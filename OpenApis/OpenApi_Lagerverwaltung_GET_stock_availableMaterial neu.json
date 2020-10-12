@@ -56,25 +56,13 @@
       "Material": {
         "type": "object",
         "properties": {
+          "StrengthClass": {
+            "$ref": "#/components/schemas/StrengthClass"
+          },
           "RawPartType": {
             "$ref": "#/components/schemas/RawPartType"
           },
           "Count": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "RawPartType": {
-        "type": "object",
-        "properties": {
-          "StrengthClass": {
-            "$ref": "#/components/schemas/StrengthClass"
-          },
-          "profile": {
-            "$ref": "#/components/schemas/Profile"
-          },
-          "Length": {
             "type": "integer",
             "format": "int64"
           }
@@ -112,6 +100,18 @@
           "GL32h",
           "GL32c"
         ]
+      },
+      "RawPartType": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "Length": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
       },
       "Profile": {
         "type": "object",

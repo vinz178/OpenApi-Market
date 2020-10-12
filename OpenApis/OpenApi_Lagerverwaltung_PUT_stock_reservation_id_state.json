@@ -31,7 +31,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The Reservation that will be manipulated.",
+            "description": "The id of the reservation that will be manipulated.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/Id"
@@ -51,11 +51,11 @@
           "200": {
             "description": "reservation state changed"
           },
-          "405": {
-            "description": "Invalid Input -> the reservation state has not changed"
+          "400": {
+            "description": "Invalid Input -> The reservation state has not changed."
           },
           "500": {
-            "description": "Internal Server Error -> the reservation state has not changed"
+            "description": "Internal Server Error -> The reservation state has not changed."
           }
         }
       }

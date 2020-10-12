@@ -39,6 +39,16 @@
           "required": true
         },
         "responses": {
+          "200": {
+            "description": "created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Id"
+                }
+              }
+            }
+          },
           "201": {
             "description": "created",
             "content": {
@@ -49,11 +59,11 @@
               }
             }
           },
-          "405": {
-            "description": "Invalid Input -> the reservation is not created"
+          "400": {
+            "description": "Invalid Input -> The reservation is not created."
           },
           "500": {
-            "description": "Internal Server Error -> the reservation is not created"
+            "description": "Internal Server Error -> The reservation is not created."
           }
         }
       }
@@ -80,6 +90,9 @@
       "RawPartType": {
         "type": "object",
         "properties": {
+          "StrengthClass": {
+            "$ref": "#/components/schemas/StrengthClass"
+          },
           "profile": {
             "$ref": "#/components/schemas/Profile"
           },
@@ -88,6 +101,39 @@
             "format": "int64"
           }
         }
+      },
+      "StrengthClass": {
+        "type": "string",
+        "enum": [
+          "C14",
+          "C16",
+          "C18",
+          "C22",
+          "C24",
+          "C27",
+          "C30",
+          "C35",
+          "C40",
+          "D30",
+          "D35",
+          "D40",
+          "D60",
+          "D70",
+          "GL20h",
+          "GL20c",
+          "GL22h",
+          "GL22c",
+          "GL24h",
+          "GL24c",
+          "GL26h",
+          "GL26c",
+          "GL28h",
+          "GL28c",
+          "GL30h",
+          "GL30c",
+          "GL32h",
+          "GL32c"
+        ]
       },
       "Profile": {
         "type": "object",

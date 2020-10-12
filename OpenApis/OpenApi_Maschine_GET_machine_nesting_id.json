@@ -42,14 +42,14 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json": {
+              "application/vnd.nesting.v1+json": {
                 "schema": {
                   "$ref": "#/components/schemas/NestingPart"
                 }
               },
-              "application/xml": {
+              "application/vnd.nesting.v2+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NestingPart"
+                  "$ref": "#/components/schemas/NestingPartV2"
                 }
               }
             }
@@ -71,6 +71,32 @@
         "format": "uuid"
       },
       "NestingPart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "rowPartId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "NestingPartV2": {
         "type": "object",
         "properties": {
           "id": {
