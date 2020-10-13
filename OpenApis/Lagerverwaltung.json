@@ -214,7 +214,7 @@
           "StrengthClass": {
             "$ref": "#/components/schemas/StrengthClass"
           },
-          "profile": {
+          "Profile": {
             "$ref": "#/components/schemas/Profile"
           },
           "Length": {
