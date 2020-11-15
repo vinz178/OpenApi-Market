@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Verschnitt Optimierung",
-    "description": "Service that nests ProductionParts into RowPart",
-    "termsOfService": "http://BeschreibungDerOptimierung.com/terms/",
+    "title": "MachineService",
+    "description": "Service that executes the actual processings.",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
@@ -17,16 +17,16 @@
   },
   "servers": [
     {
-      "url": "https://localhost:44377/"
+      "url": "/"
     }
   ],
   "paths": {
-    "/optimization/job/{id}": {
+    "/machine/nesting/{id}": {
       "get": {
         "tags": [
-          "optimization"
+          "machine"
         ],
-        "description": "Get a optimizationjob by id.",
+        "description": "Get the state of nesting by id.",
         "parameters": [
           {
             "name": "id",
@@ -42,14 +42,14 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json": {
+              "application/vnd.nesting.v1+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OptimizationJob"
+                  "$ref": "#/components/schemas/NestingPart"
                 }
               },
-              "application/xml": {
+              "application/vnd.nesting.v2+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OptimizationJob"
+                  "$ref": "#/components/schemas/NestingPartV2"
                 }
               }
             }
@@ -70,36 +70,43 @@
         "type": "string",
         "format": "uuid"
       },
-      "State": {
-        "type": "string",
-        "enum": [
-          "created",
-          "processing",
-          "done"
-        ]
-      },
-      "OptimizationJob": {
+      "NestingPart": {
         "type": "object",
         "properties": {
           "id": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "rowPartId": {
             "$ref": "#/components/schemas/Id"
           },
           "state": {
             "$ref": "#/components/schemas/State"
           },
-          "parts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OptimizationPart"
-            }
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
-      "OptimizationPart": {
+      "NestingPartV2": {
         "type": "object",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/Id"
+          },
+          "rowPartId": {
+            "$ref": "#/components/schemas/Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
           },
           "length": {
             "type": "integer",
@@ -118,6 +125,17 @@
             "format": "int32"
           }
         }
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "inizialized",
+          "waiting",
+          "processing",
+          "cancel",
+          "error",
+          "succeded"
+        ]
       }
     }
   }

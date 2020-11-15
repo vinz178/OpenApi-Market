@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Fertigungsleitsystem",
+    "title": "ProductionControlService",
     "description": "Service for controling production",
     "termsOfService": "http://BeschreibungDesLeitsystem.com/terms/",
     "contact": {

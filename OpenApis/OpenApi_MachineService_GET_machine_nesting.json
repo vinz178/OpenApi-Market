@@ -1,0 +1,67 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "MachineService",
+    "description": "Service that executes the actual processings.",
+    "termsOfService": "",
+    "contact": {
+      "name": "Vinzenz Geyer",
+      "url": "https://www.hundegger.com",
+      "email": "v.geyer@hundegger.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/machine/nesting": {
+      "get": {
+        "tags": [
+          "machine"
+        ],
+        "description": "Get all ids of all nestings.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Id"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Id"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Id": {
+        "type": "string",
+        "format": "uuid"
+      }
+    }
+  }
+}

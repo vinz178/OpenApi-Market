@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Maschine",
+    "title": "MachineService",
     "description": "Service that executes the actual processings.",
-    "termsOfService": "http://BeschreibungDerMaschine.com/terms/",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
@@ -21,35 +21,24 @@
     }
   ],
   "paths": {
-    "/machine/nesting/{id}/state": {
+    "/machine/info": {
       "get": {
         "tags": [
           "machine"
         ],
-        "description": "Get the state of nesting by id.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The id that needs to be fetched.",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/Id"
-            }
-          }
-        ],
+        "description": "Get information about the machine.",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/State"
+                  "$ref": "#/components/schemas/MachineInfo"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/State"
+                  "$ref": "#/components/schemas/MachineInfo"
                 }
               }
             }
@@ -66,20 +55,35 @@
   },
   "components": {
     "schemas": {
-      "Id": {
-        "type": "string",
-        "format": "uuid"
-      },
-      "State": {
-        "type": "string",
-        "enum": [
-          "inizialized",
-          "waiting",
-          "processing",
-          "cancel",
-          "error",
-          "succeded"
-        ]
+      "MachineInfo": {
+        "type": "object",
+        "properties": {
+          "machineType": {
+            "type": "string",
+            "enum": [
+              "panel",
+              "beam",
+              "compound"
+            ]
+          },
+          "configuration": {
+            "type": "object",
+            "properties": {
+              "saw": {
+                "type": "boolean"
+              },
+              "miller": {
+                "type": "boolean"
+              },
+              "driller": {
+                "type": "boolean"
+              },
+              "brush": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
       }
     }
   }

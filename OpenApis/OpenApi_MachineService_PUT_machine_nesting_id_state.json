@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Verschnitt Optimierung",
-    "description": "Service that nests ProductionParts into RowPart",
-    "termsOfService": "http://BeschreibungDerOptimierung.com/terms/",
+    "title": "MachineService",
+    "description": "Service that executes the actual processings.",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
@@ -17,27 +17,43 @@
   },
   "servers": [
     {
-      "url": "https://localhost:44377/"
+      "url": "/"
     }
   ],
   "paths": {
-    "/optimization/job/{id}/state": {
-      "get": {
+    "/machine/nesting/{id}/state": {
+      "put": {
         "tags": [
-          "optimization"
+          "machine"
         ],
-        "description": "Get the state of a optimizationjob by id.",
+        "description": "Set the state of nesting.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The id that needs to be fetched.",
+            "description": "The id of the nesting that needs to be set.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/Id"
             }
           }
         ],
+        "requestBody": {
+          "description": "desired state of nesting",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/State"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/State"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -57,8 +73,11 @@
           "404": {
             "description": "Not Found"
           },
+          "405": {
+            "description": "Invalid Input -> nesting was not changed"
+          },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error -> nesting was not changed"
           }
         }
       }
@@ -73,9 +92,12 @@
       "State": {
         "type": "string",
         "enum": [
-          "created",
+          "inizialized",
+          "waiting",
           "processing",
-          "done"
+          "cancel",
+          "error",
+          "succeded"
         ]
       }
     }

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Maschine",
-    "description": "Service that executes the actual processings.",
-    "termsOfService": "http://BeschreibungDerMaschine.com/terms/",
+    "title": "MaterialUsageOptimizationService",
+    "description": "Service that nests ProductionParts into RowPart",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
@@ -17,37 +17,45 @@
   },
   "servers": [
     {
-      "url": "/"
+      "url": "https://localhost:44377/"
     }
   ],
   "paths": {
-    "/machine/nesting": {
+    "/optimization/job/{id}/state": {
       "get": {
         "tags": [
-          "machine"
+          "optimization"
         ],
-        "description": "Get all ids of all nestings.",
+        "description": "Get the state of a optimizationjob by id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Id"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Id"
-                  }
+                  "$ref": "#/components/schemas/State"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Id"
-                  }
+                  "$ref": "#/components/schemas/State"
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -61,6 +69,14 @@
       "Id": {
         "type": "string",
         "format": "uuid"
+      },
+      "State": {
+        "type": "string",
+        "enum": [
+          "created",
+          "processing",
+          "done"
+        ]
       }
     }
   }

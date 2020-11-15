@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Verschnitt Optimierung",
+    "title": "MaterialUsageOptimizationService",
     "description": "Service that nests ProductionParts into RowPart",
-    "termsOfService": "http://BeschreibungDerOptimierung.com/terms/",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",

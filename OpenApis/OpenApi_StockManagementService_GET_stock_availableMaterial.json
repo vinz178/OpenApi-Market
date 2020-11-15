@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Lagerverwaltung",
+    "title": "StockManagementService",
     "description": "Service that does the stock management.",
-    "termsOfService": "http://BeschreibungDerLagerverwaltung.com/terms/",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",

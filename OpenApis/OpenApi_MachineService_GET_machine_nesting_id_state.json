@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Maschine",
+    "title": "MachineService",
     "description": "Service that executes the actual processings.",
-    "termsOfService": "http://BeschreibungDerMaschine.com/terms/",
+    "termsOfService": "",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
@@ -22,38 +22,22 @@
   ],
   "paths": {
     "/machine/nesting/{id}/state": {
-      "put": {
+      "get": {
         "tags": [
           "machine"
         ],
-        "description": "Set the state of nesting.",
+        "description": "Get the state of nesting by id.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "The id of the nesting that needs to be set.",
+            "description": "The id that needs to be fetched.",
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/Id"
             }
           }
         ],
-        "requestBody": {
-          "description": "desired state of nesting",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/State"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/State"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -73,11 +57,8 @@
           "404": {
             "description": "Not Found"
           },
-          "405": {
-            "description": "Invalid Input -> nesting was not changed"
-          },
           "500": {
-            "description": "Internal Server Error -> nesting was not changed"
+            "description": "Internal Server Error"
           }
         }
       }
