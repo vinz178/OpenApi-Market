@@ -3,7 +3,7 @@
   "info": {
     "title": "MaterialUsageOptimizationService",
     "description": "Service that nests ProductionParts into RowPart",
-    "termsOfService": "",
+    "termsOfService": "http://termsOfService.com/terms/",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",

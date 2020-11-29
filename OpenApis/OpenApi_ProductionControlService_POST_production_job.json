@@ -3,7 +3,7 @@
   "info": {
     "title": "ProductionControlService",
     "description": "Service for controling production",
-    "termsOfService": "http://BeschreibungDesLeitsystem.com/terms/",
+    "termsOfService": "http://termsOfService.com/terms/",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",

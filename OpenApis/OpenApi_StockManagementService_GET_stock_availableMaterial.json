@@ -3,7 +3,7 @@
   "info": {
     "title": "StockManagementService",
     "description": "Service that does the stock management.",
-    "termsOfService": "",
+    "termsOfService": "http://termsOfService.com/terms/",
     "contact": {
       "name": "Vinzenz Geyer",
       "url": "https://www.hundegger.com",
